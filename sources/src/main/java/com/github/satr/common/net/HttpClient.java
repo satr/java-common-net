@@ -1,4 +1,4 @@
-package common.net;
+package com.github.satr.common.net;
 // Copyright © 2019, github.com/satr, MIT License
 
 import org.apache.http.HttpEntity;
