@@ -14,11 +14,11 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Properties;
 
-public class HttpClient {
+public class ApacheHttpClientWrapper {
     private final PatternLayout patternLayout = new PatternLayout("%d [%t] %-5p %c - %m%n");
     private Optional<Logger> optionalLogger = Optional.empty();
 
-    public void execute(HttpClientAction httpClientAction) throws IOException {
+    public void executeRequest(HttpClientAction httpClientAction) throws IOException {
         CloseableHttpClient httpClient = null;
         try {
             httpClient = HttpClientBuilder.create().build();
@@ -87,6 +87,6 @@ public class HttpClient {
         log4jProp.setProperty("log4j.rootLogger", "DEBUG");
         log4jProp.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.Log4JLogger");
         PropertyConfigurator.configure(log4jProp);
-        optionalLogger = Optional.of(Logger.getLogger(HttpClient.class));
+        optionalLogger = Optional.of(Logger.getLogger(ApacheHttpClientWrapper.class));
     }
 }
