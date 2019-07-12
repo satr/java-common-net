@@ -5,7 +5,17 @@ import org.apache.http.client.methods.HttpUriRequest;
 
 import java.io.IOException;
 
-public abstract class HttpClientAction {
-    public abstract HttpUriRequest getHttpRequest() throws IOException;
-    public abstract void processRespond(int statusCode, String respondBody) throws IOException;
+/**
+ * Provides the http-request parameters and process a respond of the request.
+ */
+public interface HttpClientAction {
+    /**
+     * Provides a http-request parameters.
+     * */
+    HttpUriRequest getHttpRequest() throws IOException;
+
+    /**
+     * Process a respond in the http-request.
+     * */
+    void processRespond(int statusCode, String respondBody) throws IOException;
 }

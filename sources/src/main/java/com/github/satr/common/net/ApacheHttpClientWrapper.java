@@ -14,10 +14,14 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Properties;
 
-public class ApacheHttpClientWrapper {
+/**
+ * The wrapper around Apache HTTP client with boilerplate code for request execution.
+ */
+public class ApacheHttpClientWrapper implements HttpClientWrapper {
     private final PatternLayout patternLayout = new PatternLayout("%d [%t] %-5p %c - %m%n");
     private Optional<Logger> optionalLogger = Optional.empty();
 
+    @Override
     public void executeRequest(HttpClientAction httpClientAction) throws IOException {
         CloseableHttpClient httpClient = null;
         try {
@@ -63,12 +67,12 @@ public class ApacheHttpClientWrapper {
         optionalLogger.ifPresent(l -> l.debug(message));
     }
 
-    public void logToConsole() {
+    private void logToConsole() {
         initLogger();
         optionalLogger.ifPresent(l -> l.addAppender(new ConsoleAppender(patternLayout)));
     }
 
-    public void logToFile(String filePath) {
+    private void logToFile(String filePath) {
         initLogger();
         optionalLogger.ifPresent(l -> {
             try {
